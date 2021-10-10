@@ -1,8 +1,9 @@
-const frequency = 1.5; // ranges from 0-1
+const frequency = 1;
+const lang = 'spanish';
 
 chrome.runtime.onInstalled.addListener(() => {
 	chrome.storage.sync.set({ frequency });
 	console.log(`Default frequency set to: ${frequency}`);
-	chrome.storage.sync.set({ lang: 'spanish' });
-	console.log(`Default language set to: Spanish`);
+	chrome.storage.sync.set({ lang });
+	console.log(`Default language set to: ${lang}`);
 });

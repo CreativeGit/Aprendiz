@@ -1,0 +1,41 @@
+h1 {
+	color: #ff4f4f;
+	margin-bottom: 5px;
+	margin-left: 50px;
+}
+span {
+	color: #00008b;
+	margin-left: 60px;
+}
+select {
+	display: inline-block;
+	color: #ff7f7f;
+	background-color: #afdfff;
+	border: none;
+	padding: 2px 3px;
+	font-weight: bold;
+	border-radius: 4px;
+	margin-left: 50px;
+}
+hr {
+	width: 80%;
+	background-color: #ff7f7f;
+}
+input {
+	background-color: #7fbfff;
+	border: 1px solid black;
+	padding: 2px 5px;
+	border-radius: 5px;
+	color: #00008b;
+	font-weight: bold;
+	margin-left: 50px;
+	margin-bottom: 20px;
+}
+option {
+	color: #ff7f7f;
+}
+body {
+	background-color: #7fbfff;
+	width: 300px;
+	/*font-family: 'Proxima Nova';*/
+}

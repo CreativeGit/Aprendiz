@@ -1,1 +1,29 @@
 /* CSS styling for Aprendiz tooltips */
+
+.tooltip-aprendiz {
+	position: relative;
+	display: inline-block;
+	border-bottom: 1px dotted black;
+	background-color: rgba(200, 0, 0, 0.8);
+	padding: 0 5px;
+	border-radius: 3px;
+}
+
+.tooltip-aprendiz .tooltip-aprendiz-text {
+	visibility: hidden;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	padding: 5px;
+	border-radius: 6px;
+	position: absolute;
+	z-index: 1;
+
+	bottom: 100%;
+	left: 50%;
+	margin-left: -50%;
+}
+
+.tooltip-aprendiz:hover .tooltip-aprendiz-text {
+	visibility: visible;
+}

@@ -1,32 +1,37 @@
 chrome.storage.sync.get("frequency", ({ frequency }) => {
 	chrome.storage.sync.get("lang", ({ lang }) => {
-		console.log(lang);
-		if (!lang) return;
-		translateWords(~~frequency, lang);
+		if (!frequency || !lang) return;
+		translateWords(Number(frequency), lang);
 	});
 });
 
+let pastParas = [];
+
 function translateWords (freq, lang) {
+	if (pastParas.length) {
+		// Restore natural state before translating
+		pastParas.forEach(([para, text]) => para.innerHTML = text);
+		pastParas = [];
+	}
 	for (const para of document.querySelectorAll('p')) {
 		const words = wordsMap(para.textContent);
 		let text = para.innerHTML;
+		const temp = text;
 		Object.entries(words).forEach(([word, map]) => {
 			if (word === 'constructor') return;
 			if (!dictionary[word]) return;
-			// word exists in dictionary
-			// Go for word?
 			const dict = dictionary[word];
-			if (Math.random() < freq * dict.r) {
+			if (Math.random() < freq * dict.r / 100) {
 				// We're changing this word!
 				const sample = map[Math.floor(Math.random() * map.length)];
-				const tempArr = text.split(sample.word);
+				const tempArr = text.split(new RegExp(`\\b${sample.word}\\b`));
 				const splinter = Math.floor(Math.random() * (tempArr.length - 1));
 				tempArr[splinter] = tempArr[splinter] + tag(sample.cap(dict[lang]), sample.word) + tempArr[splinter + 1];
 				tempArr.splice(splinter + 1, 1);
 				text = tempArr.join(sample.word);
-				console.log(`Replaced ${sample.word} with ${sample.cap(dict[lang])}`);
 			}
 		});
+		pastParas.push([para, temp]);
 		para.innerHTML = text;
 	}
 }
@@ -56,5 +61,11 @@ function wordsMap (text) {
 }
 
 function tag (word, def) {
-	return `<b>${word}</b>`;
+	return `<div class="tooltip-aprendiz">${word}<span class="tooltip-aprendiz-text">${def}</span></div>`;
+}
+
+{
+	chrome.runtime.onMessage.addListener((request, sender) => {
+		if (request.freq && request.lang !== 'null') translateWords(request.freq, request.lang);
+	});
 }

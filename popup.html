@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="button.css">
+		<meta charset="utf8"/>
+		<link rel="stylesheet" href="popup.css">
 	</head>
 	<body>
-		<button id="changeColor"></button>
+		<h1>Aprendiz</h1>
+		<span>Your language assistant</span>
+		<br/><br/><hr/><br/>
+		<form id="aprendiz-form">
+			<select name="lang" id="lang">
+				<option value="null">-</option>
+				<option value="dutch">Dutch (Nederlands)</option>
+				<option value="french">French (Français)</option>
+				<option value="german">German (Deutsch)</option>
+				<option value="spanish">Spanish (Español)</option>
+			</select>
+			<br/><br/>
+			<input type="submit" value="Go!"/>
+		</form>
 		<script src="popup.js"></script>
 	</body>
 </html>
-
-<!--This will be rehauled-->
